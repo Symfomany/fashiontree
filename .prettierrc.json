@@ -1,0 +1,19 @@
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "linebreak-style": true,
+  "singleQuote": true,
+  "comma-dangle": ["error", "always-multiline"],
+  "vue/order-in-components": "error",
+  "no-console": "off",
+  "endOfLine": "auto",
+  "quotes": [
+    "error",
+    "single",
+    {
+      "avoidEscape": true
+    }
+  ],
+  "object-curly-spacing": ["error", "always"]
+}

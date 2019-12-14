@@ -6,6 +6,11 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    name: 'listing',
+    component: () => import('../containers/ListingContainer.vue'),
+  },
+  {
+    path: '/',
     name: 'registration',
     component: () => import('../containers/RegistrationContainer.vue'),
   },

@@ -56,13 +56,13 @@ export default {
       this.selected = letter;
       // begin to 160px
       let sum = 0;
-      console.log(this.occurences)
+     
       for (let i in this.occurences) {
-        if (i <= letter.toUpperCase()) {
+        if (i < letter.toUpperCase()) {
           sum += this.occurences[i] * 48;
         }
       }
-      window.scrollTo(0, 130 + sum );
+      window.scrollTo(0, 270 + sum );
     },
     handleScroll() {
       if (window.pageYOffset > 160) {
@@ -90,17 +90,22 @@ export default {
   top: 10px;
   .active {
     color: #2196f3;
+    opacity: 1;
   }
   li {
-    font-size: 1.2rem;
+     transition: all 0.5s ease-out;
+      opacity: 0.4;
+    font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: bold;
     margin-top: 5px;
     &:hover {
       cursor: pointer;
+      opacity: 1;
       color: #2196f3;
     }
     &:active {
+      opacity: 1;
       color: #2196ae;
     }
   }

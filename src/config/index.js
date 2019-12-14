@@ -1,7 +1,7 @@
 /** @format */
 
 const config = {
-  url: 'http://localhost:8081',
+  url: 'http://localhost:3000',
 };
 
 export default config;

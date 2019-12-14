@@ -8,13 +8,13 @@
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gaia_Online_logo.svg/450px-Gaia_Online_logo.svg.png"
+          src="http://onetrack-esg.com/images/logo-OneTrack.png"
           transition="scale-transition"
-          width="100"
+          width="120"
       /></router-link>
     </div>
 
-    <v-tabs centered>
+    <v-tabs v-if="isConnected" centered>
       <v-tab :key="1" :href="`#tab-1`"
         ><v-icon left>list</v-icon> Listing</v-tab
       >
@@ -25,18 +25,47 @@
 
     <v-spacer></v-spacer>
 
-    <v-menu left bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn icon n v-on="on">
-          <v-icon>account_circle</v-icon>
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-          <v-list-item-title>Option {{ n }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+     <v-btn v-if="isConnected"  v-tooltip="{
+              content: '<h3>Mon compte</h3> <p> Liste</p>',
+              trigger: 'click',
+              html: true
+            }"  icon>
+      <v-icon>account_circle</v-icon>
+    </v-btn>
+    
+      <v-btn  v-tooltip="{
+              content: 'Tooltip content here',
+              trigger: 'click',
+            }"  icon>
+      <v-icon>contact_support</v-icon>
+    </v-btn>
+    
+    
+    
+    <v-btn v-if="isConnected" :to="{name: 'login'}" icon>
+      <v-icon>lock</v-icon>
+    </v-btn>
+        
+    <v-popover>
+      <div slot="popover"></div>
+    </v-popover>
+    
   </v-app-bar>
 </template>
+
+
+<script>
+import { mapState } from 'vuex';
+
+
+export default {
+    data: () => ({
+      show: false
+    }),
+    computed: {
+      ...mapState('user', {
+      isConnected: state => state.connected,
+    }),
+  },
+}
+</script>

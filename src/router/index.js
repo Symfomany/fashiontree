@@ -10,19 +10,9 @@ const routes = [
     component: () => import('../containers/ListingContainer.vue'),
   },
   {
-    path: '/',
-    name: 'registration',
-    component: () => import('../containers/RegistrationContainer.vue'),
-  },
-  {
-    path: '/confirmation',
-    name: 'confirmation',
-    component: () => import('../containers/ConfirmationContainer.vue'),
-  },
-  {
-    path: '/recommandation',
-    name: 'recommandation',
-    component: () => import('../containers/RecommandationContainer.vue'),
+    path: '/login',
+    name: 'login',
+    component: () => import('../containers/LoginContainer.vue'),
   },
 ];
 
@@ -31,5 +21,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+
+router.beforeEach((to, from, next) => {
+  if (to.name != "login" && to.name != "logout" && !localStorage.getItem('token')) next('/login');
+  else next()
+})
 
 export default router;

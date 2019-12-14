@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header></Header>
+    <Header ></Header>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -16,6 +16,9 @@ export default {
   name: 'App',
   components: {
     Header,
+  },
+  computed: {
+    
   },
   methods: {},
   created() {},

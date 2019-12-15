@@ -56,20 +56,20 @@ export default {
       this.selected = letter;
       // begin to 160px
       let sum = 0;
-     
+
       for (let i in this.occurences) {
         if (i < letter.toUpperCase()) {
           sum += this.occurences[i] * 48;
         }
       }
-      window.scrollTo(0, 270 + sum );
+      window.scrollTo(0, 270 + sum);
     },
     handleScroll() {
       if (window.pageYOffset > 160) {
         //console.log(window.pageYOffset)
         //let sum = 0;
         for (let i in this.getHeights) {
-          if (window.pageYOffset <= this.getHeights[i]  + 120) {
+          if (window.pageYOffset <= this.getHeights[i] + 120) {
             this.selected = i.toLowerCase();
             break;
           }
@@ -93,8 +93,8 @@ export default {
     opacity: 1;
   }
   li {
-     transition: all 0.5s ease-out;
-      opacity: 0.4;
+    transition: all 0.5s ease-out;
+    opacity: 0.4;
     font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: bold;

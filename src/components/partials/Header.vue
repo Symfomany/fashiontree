@@ -25,47 +25,55 @@
 
     <v-spacer></v-spacer>
 
-     <v-btn v-if="isConnected"  v-tooltip="{
-              content: '<h3>Mon compte</h3> <p> Liste</p>',
-              trigger: 'click',
-              html: true
-            }"  icon>
+    <v-btn
+      v-if="isConnected"
+      v-tooltip="{
+        content: '<h3>Mon compte</h3> <p> Liste</p>',
+        trigger: 'click',
+        html: true,
+      }"
+      icon
+    >
       <v-icon>account_circle</v-icon>
     </v-btn>
-    
-      <v-btn  v-tooltip="{
-              content: 'Tooltip content here',
-              trigger: 'click',
-            }"  icon>
+
+    <v-btn
+      v-tooltip="{
+        content: 'Tooltip content here',
+        trigger: 'click',
+      }"
+      icon
+    >
       <v-icon>contact_support</v-icon>
     </v-btn>
-    
-    
-    
-    <v-btn v-if="isConnected" :to="{name: 'login'}" icon>
+
+    <v-btn v-if="isConnected" @click="logout" icon>
       <v-icon>lock</v-icon>
     </v-btn>
-        
+
     <v-popover>
       <div slot="popover"></div>
     </v-popover>
-    
   </v-app-bar>
 </template>
-
 
 <script>
 import { mapState } from 'vuex';
 
-
 export default {
-    data: () => ({
-      show: false
-    }),
-    computed: {
-      ...mapState('user', {
+  data: () => ({
+    show: false,
+  }),
+  computed: {
+    ...mapState('user', {
       isConnected: state => state.connected,
     }),
   },
-}
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.$router.push({ name: 'login' });
+    },
+  },
+};
 </script>

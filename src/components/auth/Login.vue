@@ -1,29 +1,28 @@
 <template>
   <v-app id="inspire">
+    <v-snackbar v-model="snackbar" :timeout="4000">
+      Mauvais Login et/ou Mot de passe.
+      <v-btn color="pink" text @click="snackbar = false">
+        Fermer
+      </v-btn>
+    </v-snackbar>
+
     <v-content>
-      <v-container
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
+      <v-container fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="elevation-12" :loading="loading">
+              <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Login form</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
-                <v-form  ref="form" v-model="valid" :lazy-validation="false">
+                <v-form
+                  @submit.prevent="log"
+                  ref="form"
+                  v-model="valid"
+                  :lazy-validation="false"
+                >
                   <v-text-field
                     label="Login"
                     name="login"
@@ -36,7 +35,7 @@
                   <v-text-field
                     id="password"
                     label="Password"
-                     :rules="passwordRules"
+                    :rules="passwordRules"
                     name="password"
                     prepend-icon="lock"
                     type="password"
@@ -46,7 +45,9 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn @click="log" :disabled="!valid" color="primary">Se connecter</v-btn>
+                <v-btn @click="log" :disabled="!valid" color="primary"
+                  >Se connecter</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
@@ -57,40 +58,50 @@
 </template>
 
 <script>
-
-  export default {
-    
-    data: () => ({
-      login:"",
-      password: "",
-      valid: true,
-       loginRules: [
-        v => !!v || 'Login is required',
-        v => (v && v.length > 3 ) || 'Login must be more than 3 characters',
-      ],
-      passwordRules: [
-        v => !!v || 'Password is required',
-        v => (v && v.length > 3 ) || 'Password must be more than 3 characters',
-      ],
-    }),
-    methods: {
-      validate () {
-        if (this.$refs.form.validate()) {
-          this.snackbar = true
-        }
-      },
-      log(){
-        if (this.$refs.form.validate()) {
-            this.$store.dispatch('user/login', {login: this.login, password: this.password}).then((res) => {
-              localStorage.setItem('token', res.data.token);
-              this.$router.push({ name: 'listing'})
-            })
-
-        }
+export default {
+  data: () => ({
+    snackbar: false,
+    loading: false,
+    login: '',
+    password: '',
+    valid: true,
+    loginRules: [
+      v => !!v || 'Login is required',
+      v => (v && v.length > 3) || 'Login must be more than 3 characters',
+    ],
+    passwordRules: [
+      v => !!v || 'Password is required',
+      v => (v && v.length > 3) || 'Password must be more than 3 characters',
+    ],
+  }),
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
       }
     },
-    props: {
-      source: String,
+    log() {
+      this.loading = true;
+      if (this.$refs.form.validate()) {
+        this.$store
+          .dispatch('user/login', {
+            login: this.login,
+            password: this.password,
+          })
+          .then(res => {
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('user', res.data.user);
+            this.$router.push({ name: 'listing' });
+          })
+          .catch(() => {
+            this.snackbar = true;
+            this.loading = false;
+          });
+      }
     },
-  }
+  },
+  props: {
+    source: String,
+  },
+};
 </script>

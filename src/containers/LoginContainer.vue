@@ -11,14 +11,11 @@ export default {
   components: {
     Login,
   },
-  data: () => ({
-  }),
+  data: () => ({}),
   created() {
-      this.$store.commit('user/disconnect');
+    this.$store.commit('user/disconnect');
   },
   computed: {},
-  methods: {
-  },
+  methods: {},
 };
 </script>
-

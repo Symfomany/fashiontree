@@ -7,10 +7,10 @@ export default {
   },
 
   mutations: {
-    connect(state){
+    connect(state) {
       state.connected = true;
     },
-    disconnect(state){
+    disconnect(state) {
       state.connected = false;
     },
     updateAuth(state, auth) {
@@ -22,7 +22,7 @@ export default {
   },
 
   actions: {
-    login(state,{login, password}) {
+    login(state, { login, password }) {
       return xhr.post(`/login`, {
         login,
         password,
@@ -30,7 +30,5 @@ export default {
     },
   },
 
-  getters: {
-    
-  },
+  getters: {},
 };

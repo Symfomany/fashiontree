@@ -10,6 +10,15 @@ html {
     background-color: transparent;
 }
 
+.theme--light.v-text-field--solo > .v-input__control > .v-input__slot{
+  box-shadow: none !important;
+  border-top: 3px solid #2196f3 !important;
+  border: 1px solid #eee;
+}
+
+.theme--light.v-sheet.borderBlue{
+  border-top: 8px solid #2196f3;
+}
 
 .tooltip {
     
@@ -23,9 +32,9 @@ html {
       min-width: 450px;
       min-height: 200px;
       border-top: 7px solid #2196f3;
-      border-bottom: 1px solid #ccc;
-      border-left: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #eee;
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
       border-radius: 5px;
     }
   

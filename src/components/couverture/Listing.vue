@@ -7,7 +7,7 @@
       <v-card>
         <v-card-title>
           <span class="bold"
-            >{{ getFilterDesserts.length + ' entreprises' }}
+            >{{ getFilterDesserts.length + ' résultats de recherche entreprises' }}
           </span>
           <v-spacer></v-spacer>
           <v-autocomplete
@@ -182,6 +182,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+table tr:hover{
+  cursor: zoom-in;
+}
 .theme--light.v-data-table thead {
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
 }

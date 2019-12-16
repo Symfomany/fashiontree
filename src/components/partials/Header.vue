@@ -37,8 +37,12 @@
                 transparent
                 v-on="on"
                 icon
-                ><v-icon left>account_circle</v-icon></v-btn
-              >
+                >
+                <v-badge top left>
+                  <template v-slot:badge>3</template>
+                  <v-icon>account_circle</v-icon>
+                </v-badge>
+              </v-btn>
             </template>
             <v-card
               width="500"

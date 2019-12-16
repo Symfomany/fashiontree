@@ -3,6 +3,18 @@ $color-pack: false;
 @import '~vuetify/src/styles/main.sass';
 
 
+
+.odd {
+  background-color: #2196f3;
+}
+.contreverse {
+  background-color: #03a9f4;
+}
+.noteg {
+  background-color: #00bcd4;
+}
+
+
 html {
     scroll-behavior: smooth;
 }

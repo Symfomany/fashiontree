@@ -10,11 +10,12 @@
     <v-content>
       <v-container fluid>
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="4">
+          <v-col cols="12" sm="10" md="5">
             <v-card class="elevation-12" :loading="loading">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer />
+                <v-toolbar-title>Se connecter à Gaia</v-toolbar-title>
+                  <v-spacer />
+                  <v-btn color="pink" dark><v-icon left>forward</v-icon> OneTrack</v-btn>
               </v-toolbar>
               <v-card-text>
                 <v-form
@@ -46,9 +47,11 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn @click="log" :disabled="!valid" color="primary"
-                  >Se connecter</v-btn
+                  ><v-icon left>send</v-icon>Se connecter à Gaia</v-btn
                 >
               </v-card-actions>
+                <!-- <p><a @click="log"  color="pink">Se connecter à OneTrack</a></p> -->
+              
             </v-card>
           </v-col>
         </v-row>

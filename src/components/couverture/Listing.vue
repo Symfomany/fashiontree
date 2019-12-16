@@ -12,7 +12,9 @@
           <v-spacer></v-spacer>
           <v-autocomplete
             v-model="search"
+            no-data-text="Aucune suggestion à proposer"
             solo
+            clearable
             append-icon="search"
             label="Rechercher un nom, un ISN, un SIRET..."
             :items="components"
@@ -49,17 +51,17 @@
                 <td>
                   {{ item.carbs.charAt(0).toUpperCase() + item.carbs.slice(1) }}
                 </td>
-                <td>
+                <td style="text-align:center">
                   <span :class="`${getOdd(item.protein)}--text subtitle-1`">{{
                     item.protein.charAt(0).toUpperCase() + item.protein.slice(1)
                   }}</span>
                 </td>
-                <td>
+                <td style="text-align:center">
                   <v-chip label :class="`white--text ${getIron(item.iron)}`">
                     {{ item.iron }}</v-chip
                   >
                 </td>
-                <td>
+                <td style="text-align:center">
                   <b class="display-1 font-weight-bold">{{ item.note }}</b
                   ><br />
                   <small :class="item.annee == 2019 ? `red--text` : ``">{{
@@ -105,16 +107,6 @@ export default {
       'Yogurt',
       'Frozen',
       'Ice',
-      'Autocompletes',
-      'Comboboxes',
-      'Forms',
-      'Inputs',
-      'Overflow Buttons',
-      'Selects',
-      'Selection Controls',
-      'Sliders',
-      'Textareas',
-      'Text Fields',
     ],
     headers: headers,
     desserts: desserts,
@@ -124,7 +116,7 @@ export default {
   },
   computed: {
     getFilterDesserts() {
-      if (this.search.length >= 3) {
+      if (this.search && this.search.length >= 3) {
         let rex = new RegExp(this.search, 'ig');
         return this.desserts.filter(dessert => rex.test(dessert.name));
       } else {
@@ -208,13 +200,5 @@ export default {
   text-align: center !important;
 }
 
-.odd {
-  background-color: #2196f3;
-}
-.contreverse {
-  background-color: #03a9f4;
-}
-.noteg {
-  background-color: #00bcd4;
-}
+
 </style>

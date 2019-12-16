@@ -40,6 +40,7 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
+                    @keyup="keymonitor"
                     v-model="password"
                   />
                 </v-form>
@@ -78,6 +79,12 @@ export default {
     ],
   }),
   methods: {
+    keymonitor(event) {
+       if(event.key == "Enter")
+       {
+         this.log();
+       }
+    },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;

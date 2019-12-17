@@ -6,6 +6,14 @@ let proxyNeuralytics = {
 };
 
 module.exports = {
+  pluginOptions: {
+    i18n: {
+      locale: 'fr',
+      fallbackLocale: 'fr',
+      localeDir: 'lang',
+      enableInSFC: true,
+    },
+  },
   transpileDependencies: ['vuetify'],
   configureWebpack: {
     devtool: 'source-map',

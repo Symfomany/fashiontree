@@ -9,7 +9,7 @@ const routes = [
     name: 'listing',
     component: () => import('../containers/ListingContainer.vue'),
   },
-  
+
   {
     path: '/detail/:id',
     name: 'detail',

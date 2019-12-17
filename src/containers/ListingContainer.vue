@@ -2,12 +2,18 @@
   <div>
     <v-container>
       <v-layout>
-        <v-row class="d-flex md-12 justify-space-between">
+        <v-row class="d-flex ml-1 justify-space-between">
           <h3 class="display-1">Couverture</h3>
+          <p>{{ $t('hello') }}</p>
+          Langue:<select v-model="$i18n.locale">
+            <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang"
+              >Test{{ lang }}</option
+            >
+          </select>
 
           <v-menu
             v-model="openExport"
-            :offset-y="true"
+            offset-y
             :close-on-content-click="false"
             transition="slide-y-transition"
           >
@@ -34,20 +40,24 @@
                 <v-row justify="space-around">
                   <v-switch
                     class="mx-2"
+                    color="primary"
                     v-model="collect_last"
                     label="Dernière année"
                   ></v-switch>
                   <v-switch
                     class="mx-2"
+                    color="primary"
                     v-model="collect_2018"
                     label="2018"
                   ></v-switch>
                   <v-switch
+                    color="primary"
                     class="mx-2"
                     v-model="collect_2017"
                     label="2017"
                   ></v-switch>
                   <v-switch
+                    color="primary"
                     class="mx-2"
                     v-model="collect_2016"
                     label="2016"
@@ -61,16 +71,31 @@
                 ></v-select>
 
                 <p>Type d'export</p>
-                <v-row>
+                <v-row no-gutters>
                   <v-radio-group row>
-                    <v-radio key="pdf" label="PDF" value="pdf"></v-radio>
-                    <v-radio key="excel" label="Excel" value="excel"></v-radio>
+                    <v-radio
+                      key="pdf"
+                      color="primary"
+                      label="PDF"
+                      value="pdf"
+                    ></v-radio>
+                    <v-radio
+                      key="excel"
+                      color="primary"
+                      label="Excel"
+                      value="excel"
+                    ></v-radio>
                   </v-radio-group>
                 </v-row>
 
                 <p>Référenciel</p>
                 <v-select
-                  :items="['Gaia rating', 'A rating', 'B rating', 'C rating']"
+                  :items="[
+                    'Gaia rating',
+                    'One Track rating',
+                    'B rating',
+                    'C rating',
+                  ]"
                   label="Gaia rating"
                 ></v-select>
               </v-card-text>
@@ -118,6 +143,19 @@ export default {
     Listing,
   },
   data: () => ({
+    langs: ['fr-FR', 'en-EN'],
+    items: [
+      {
+        text: 'Liste des couvertures',
+        disabled: false,
+        href: 'breadcrumbs_dashboard',
+      },
+      {
+        text: 'Résultat de recherche',
+        disabled: false,
+        href: 'breadcrumbs_link_1',
+      },
+    ],
     openExport: false,
     loading: false,
     visible: true,

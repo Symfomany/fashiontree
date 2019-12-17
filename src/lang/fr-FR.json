@@ -1,0 +1,5 @@
+{
+    "hello": "Bonjour le monde",
+    "world": "{} le monde",
+    "apple": "aucune pomme | une pomme | {count} pommes"
+}

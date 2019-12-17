@@ -3,10 +3,15 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import '../styles/main.scss';
+import frFR from 'vuetify/es5/locale/fr';
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
+  lang: {
+    locales: { frFR },
+    current: 'frFR',
+  },
   theme: {
     themes: {
       light: {

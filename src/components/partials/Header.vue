@@ -24,92 +24,104 @@
     </v-tabs>
 
     <v-spacer></v-spacer>
-  
-    
-          <v-menu
-            v-model="openExport"
-            :offset-y="true"
-            :close-on-content-click="false"
-            transition="slide-y-transition"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                transparent
-                v-on="on"
-                icon
-                >
-                <v-badge top left>
-                  <template v-slot:badge>3</template>
-                  <v-icon>account_circle</v-icon>
-                </v-badge>
-              </v-btn>
-            </template>
-            <v-card
-              width="500"
-              class="borderBlue"
-            >
-              <v-card-title>
-                <v-avatar left class="white--text headline" size="36px" color="teal" >BJ</v-avatar>
-              <span class="col-md-4">Boyer Julien</span></v-card-title>
 
-              <v-card-text>
-               <v-icon left>email</v-icon> <span>j.boyer69003@gmail.com</span>
-              </v-card-text>
-              <hr />
-              <v-card-text  class="d-flex flex-row justify-space-around align-center">
-                
-               <p><v-icon left>flag</v-icon> Langue</p>
+    <v-menu
+      v-model="openExport"
+      :offset-y="true"
+      :close-on-content-click="false"
+      transition="slide-y-transition"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn transparent v-on="on" icon>
+          <v-badge top left>
+            <template v-slot:badge>3</template>
+            <v-icon>account_circle</v-icon>
+          </v-badge>
+        </v-btn>
+      </template>
+      <v-card width="300" class="borderBlue">
+        <v-list>
+          <v-list-item-group color="primary">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-avatar
+                    left
+                    class="white--text headline"
+                    size="36px"
+                    color="primary"
+                    >BJ</v-avatar
+                  >
+                  <span class="col-md-4">Boyer Julien</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-icon left>email</v-icon>
+                  <span>j.boyer69003@gmail.com</span>
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  <a>
+                    <v-icon left>forward</v-icon> Modifier mon mot de Passe
+                  </a>
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <p><v-icon left>flag</v-icon> Langue</p>
                 <v-combobox
-                class="pa-2"
-                v-model="langue"
-                :items="['Français', 'Anglais']"
-              ></v-combobox>
-              </v-card-text>
-               <v-card-actions>
-                  <v-btn v-if="isConnected"  big color="blue" class="white--text"><v-icon left>autorenew</v-icon> Modifier le Mot de Passe</v-btn>
-                <v-btn v-if="isConnected" @click="logout"  big color="red" class="white--text"><v-icon left>lock_open</v-icon> Déconnexion</v-btn>
-               </v-card-actions>
-            </v-card>
-          </v-menu>
-   
-   
-     <v-menu
-            v-model="openExportTwo"
-            :offset-y="true"
-            :close-on-content-click="false"
-            transition="slide-y-transition"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                transparent
-                v-on="on"
-                icon
-                ><v-icon left>contact_support</v-icon></v-btn
-              >
-            </template>
-            <v-card
-              width="400"
-              class="borderBlue"
-            >
-              <v-card-title>Contact</v-card-title>
+                  class="pa-2"
+                  v-model="langue"
+                  :items="['Français', 'Anglais']"
+                ></v-combobox>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
 
-              <v-card-text>
-               308 Rue de la Liberté<br/>
-               69003 Lyon
-              </v-card-text>
-               <v-card-text>
-               Téléphone: <a>+33 674585648</a>
-              </v-card-text>
-              <hr />
-              <v-card-text>
-               29 Boulevard de Capucines<br/>
-               75001 Paris
-              </v-card-text>
-               <v-card-text>
-               Téléphone: <a>+33 674585648</a>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+        <v-card-actions>
+          <v-btn
+            v-if="isConnected"
+            @click="logout"
+            small
+            color="red"
+            class="white--text"
+            ><v-icon left>lock_open</v-icon> Déconnexion</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-menu>
+
+    <v-menu
+      v-model="openExportTwo"
+      :offset-y="true"
+      :close-on-content-click="false"
+      transition="slide-y-transition"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn transparent v-on="on" icon
+          ><v-icon left>contact_support</v-icon></v-btn
+        >
+      </template>
+      <v-card width="400" class="borderBlue">
+        <v-card-title>Contact</v-card-title>
+
+        <v-card-text>
+          308 Rue de la Liberté<br />
+          69003 Lyon
+        </v-card-text>
+        <v-card-text> Téléphone: <a>+33 674585648</a> </v-card-text>
+        <hr />
+        <v-card-text>
+          29 Boulevard de Capucines<br />
+          75001 Paris
+        </v-card-text>
+        <v-card-text> Téléphone: <a>+33 674585648</a> </v-card-text>
+      </v-card>
+    </v-menu>
 
     <v-popover>
       <div slot="popover"></div>

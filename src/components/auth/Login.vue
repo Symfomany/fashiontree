@@ -14,8 +14,10 @@
             <v-card class="elevation-12" :loading="loading">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Se connecter à Gaia</v-toolbar-title>
-                  <v-spacer />
-                  <v-btn color="pink" dark><v-icon left>forward</v-icon> OneTrack</v-btn>
+                <v-spacer />
+                <v-btn color="pink" dark
+                  ><v-icon left>forward</v-icon> OneTrack</v-btn
+                >
               </v-toolbar>
               <v-card-text>
                 <v-form
@@ -51,8 +53,7 @@
                   ><v-icon left>send</v-icon>Se connecter à Gaia</v-btn
                 >
               </v-card-actions>
-                <!-- <p><a @click="log"  color="pink">Se connecter à OneTrack</a></p> -->
-              
+              <!-- <p><a @click="log"  color="pink">Se connecter à OneTrack</a></p> -->
             </v-card>
           </v-col>
         </v-row>
@@ -80,10 +81,9 @@ export default {
   }),
   methods: {
     keymonitor(event) {
-       if(event.key == "Enter")
-       {
-         this.log();
-       }
+      if (event.key == 'Enter') {
+        this.log();
+      }
     },
     validate() {
       if (this.$refs.form.validate()) {

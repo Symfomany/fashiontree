@@ -1,7 +1,5 @@
 <template>
   <v-row>
-    
-         
     <v-col cols="1">
       <AlphabetSort :occurences="getOcc" />
     </v-col>
@@ -9,78 +7,88 @@
       <v-card>
         <v-card-title class="mb-n6">
           <span class="bold" v-if="getFilterDesserts.length"
-            >{{ getFilterDesserts.length + ' résultats de recherche entreprises' }}
+            >{{
+              getFilterDesserts.length + ' résultats de recherche entreprises'
+            }}
           </span>
           <v-spacer></v-spacer>
-        <v-row>
-          <v-autocomplete
-            v-model="search"
-            no-data-text="Aucune suggestion à proposer"
-            solo
-            clearable
-            append-icon="search"
-            label="Rechercher un nom, un ISN, un SIRET..."
-            :items="components"
-            block
-          ></v-autocomplete > 
-        </v-row>
+          <v-row>
+            <v-autocomplete
+              v-model="search"
+              no-data-text="Aucune suggestion à proposer"
+              solo
+              clearable
+              append-icon="search"
+              label="Rechercher par nom ou par un numéro ISIN"
+              :items="components"
+              block
+            ></v-autocomplete>
+          </v-row>
         </v-card-title>
-    
-      <v-menu      
-            v-model="openFilter"
-            max-width="400"
-            :close-on-content-click="false"
-            transition="slide-y-transition"
-          >
-        <template v-slot:activator="{ on }">
 
-         <v-row no-gutters class="ml-3">
-          <v-btn ref="filter" @click="openFilter = true" color="blue" class="white--text"><v-icon left>filter_list</v-icon> Filtrer la recherche</v-btn>
-        </v-row>
-        </template>
-       
-            <v-card
-            
-              class="borderBlue"
-            >
-              <v-card-title>Filtrer la recherche</v-card-title>
+        <v-menu
+          offset-y
+          v-model="openFilter"
+          max-width="400"
+          :close-on-content-click="false"
+          transition="slide-y-transition"
+        >
+          <template v-slot:activator="{ on }">
+            <v-row no-gutters class="ml-3">
+              <v-btn
+                small
+                ref="filter"
+                @click="openFilter = true"
+                color="primary"
+                class="white--text"
+                ><v-icon left>filter_list</v-icon> Filtrer la recherche</v-btn
+              >
+            </v-row>
+          </template>
 
-              <v-card-text>
-                <p>Catégorie</p>
-                <v-select
+          <v-card class="borderBlue">
+            <v-card-title>Filtrer la recherche</v-card-title>
+
+            <v-card-text>
+              <p>Catégorie</p>
+              <v-select
                 chips
                 multiple
-                  :items="['Immobilier', 'Exploitation', 'Medical', 'Domestique']"
-                  label="Immobilier"
-                ></v-select>
+                :items="['Immobilier', 'Exploitation', 'Medical', 'Domestique']"
+                label="Immobilier"
+              ></v-select>
 
-                <p>Classe d'actifs</p>
-                <v-select
+              <p>Classe d'actifs</p>
+              <v-select
                 chips
                 multiple
-                  :items="['Exploitation', 'Medical', 'Domestique']"
-                  label="Exploitation"
-                ></v-select>
+                :items="['Exploitation', 'Medical', 'Domestique']"
+                label="Exploitation"
+              ></v-select>
 
-               
-                <p>Secteurs d'activité</p>
-                <v-select
+              <p>Secteurs d'activité</p>
+              <v-select
                 chips
                 multiple
-                  :items="['Immobilier commerce', 'Immobilier medical', 'Immobilier logistique']"
-                  label="Immobilier commerce"
-                ></v-select>
-              </v-card-text>
+                :items="[
+                  'Immobilier commerce',
+                  'Immobilier medical',
+                  'Immobilier logistique',
+                ]"
+                label="Immobilier commerce"
+              ></v-select>
+            </v-card-text>
 
-              <v-card-actions>
-                <v-row align="center" justify="center">
-                  <v-btn @click="openFilter = false" color="primary"
-                    >Filtrer ma recherche</v-btn>
-                </v-row>
-              </v-card-actions>
-            </v-card>
-          </v-menu>
-        
+            <v-card-actions>
+              <v-row align="center" justify="center">
+                <v-btn @click="openFilter = false" color="primary"
+                  >Filtrer ma recherche</v-btn
+                >
+              </v-row>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+
         <v-data-table
           dense
           no-data-text="Aucune données pour le moment"
@@ -149,7 +157,6 @@
         </v-data-table>
       </v-card>
     </v-col>
-    
   </v-row>
 </template>
 
@@ -160,21 +167,13 @@ import { desserts, headers } from '../../data/datas';
 export default {
   created() {
     setTimeout(() => (this.loading = false), 2000);
-    setTimeout(() => this.desserts = desserts, 1500);
-    
+    setTimeout(() => (this.desserts = desserts), 1500);
   },
   data: () => ({
     search: '',
     loading: true,
     openFilter: false,
-    components: [
-      '*',
-      'sandwitch',
-      'cream',
-      'Yogurt',
-      'Frozen',
-      'Ice',
-    ],
+    components: ['*', 'Cream', 'Yogurt', 'Frozen', 'Ice'],
     headers: headers,
     desserts: [],
   }),
@@ -219,13 +218,13 @@ export default {
     getOdd(val) {
       switch (val) {
         case 'forte':
-          return 'font-weight-black red';
+          return 'font-weight-black ';
         case 'faible':
-          return 'font-weight-bold orange';
+          return 'font-weight-bold ';
         case 'importante':
-          return 'font-weight-medium teal';
+          return 'font-weight-medium ';
         default:
-          return 'ont-weight-regular  blue';
+          return 'ont-weight-regular  ';
       }
     },
     getIron(val) {
@@ -249,15 +248,13 @@ export default {
 </script>
 
 <style lang="scss">
-
-table tr:hover{
+table tr:hover {
   cursor: zoom-in;
 }
 .theme--light.v-data-table thead {
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
 }
 .theme--light.v-data-table thead tr:last-child th {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .theme--light.v-data-table .item {
@@ -270,6 +267,4 @@ table tr:hover{
   font-weight: bold;
   text-align: center !important;
 }
-
-
 </style>

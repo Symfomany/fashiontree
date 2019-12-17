@@ -8,18 +8,19 @@
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="http://onetrack-esg.com/images/logo-OneTrack.png"
+          src="http://www.gaia-rating.com/index.php/wp-content/uploads/2017/05/gaia-rating-copie-bd-2.png"
           transition="scale-transition"
-          width="120"
+          width="50"
       /></router-link>
     </div>
 
     <v-tabs v-if="isConnected" centered>
       <v-tab :key="1" :href="`#tab-1`"
-        ><v-icon left>list</v-icon> Listing</v-tab
+        ><v-icon left>list</v-icon> {{ $t('general.listing') }}</v-tab
       >
       <v-tab :key="2" :href="`#tab-2`"
-        ><v-icon left>question_answer</v-icon> Questionnaire</v-tab
+        ><v-icon left>question_answer</v-icon>
+        {{ $t('general.questionnaire') }}</v-tab
       >
     </v-tabs>
 
@@ -64,19 +65,22 @@
                 </v-list-item-title>
                 <v-list-item-subtitle>
                   <a>
-                    <v-icon left>forward</v-icon> Modifier mon mot de Passe
+                    <v-icon left>forward</v-icon>
+                    {{ $t('general.modifyPassword') }}
                   </a>
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <p><v-icon left>flag</v-icon> Langue</p>
-                <v-combobox
+                <p><v-icon left>flag</v-icon> {{ $t('general.language') }}</p>
+                <v-select
                   class="pa-2"
-                  v-model="langue"
-                  :items="['Français', 'Anglais']"
-                ></v-combobox>
+                  v-model="$i18n.locale"
+                  :items="langs"
+                  item-text="langue"
+                  item-value="items"
+                ></v-select>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
@@ -89,7 +93,7 @@
             small
             color="red"
             class="white--text"
-            ><v-icon left>lock_open</v-icon> Déconnexion</v-btn
+            ><v-icon left>lock_open</v-icon> {{ $t('general.signOut') }}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -107,7 +111,7 @@
         >
       </template>
       <v-card width="400" class="borderBlue">
-        <v-card-title>Contact</v-card-title>
+        <v-card-title>{{ $t('general.contact') }}</v-card-title>
 
         <v-card-text>
           308 Rue de la Liberté<br />
@@ -133,7 +137,14 @@
 import { mapState } from 'vuex';
 
 export default {
+  created() {
+    this.langs = [
+      { items: 'fr-FR', langue: this.$t('general.french') },
+      { items: 'en-EN', langue: this.$t('general.english') },
+    ];
+  },
   data: () => ({
+    langs: [],
     langue: 'Français',
     show: false,
     openExport: false,

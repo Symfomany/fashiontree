@@ -7,9 +7,7 @@
       <v-card>
         <v-card-title class="mb-n6">
           <span class="bold" v-if="getFilterDesserts.length"
-            >{{
-              getFilterDesserts.length + ' résultats de recherche entreprises'
-            }}
+            >{{ getFilterDesserts.length + ' ' + $t('general.searchResults') }}
           </span>
           <v-spacer></v-spacer>
           <v-row>
@@ -19,7 +17,7 @@
               solo
               clearable
               append-icon="search"
-              label="Rechercher par nom ou par un numéro ISIN"
+              :label="$t('general.searchCompany')"
               :items="components"
               block
             ></v-autocomplete>
@@ -41,16 +39,17 @@
                 @click="openFilter = true"
                 color="primary"
                 class="white--text"
-                ><v-icon left>filter_list</v-icon> Filtrer la recherche</v-btn
+                ><v-icon left>filter_list</v-icon>
+                {{ $t('general.filterSearch') }}</v-btn
               >
             </v-row>
           </template>
 
           <v-card class="borderBlue">
-            <v-card-title>Filtrer la recherche</v-card-title>
+            <v-card-title>{{ $t('general.filterSearch') }}</v-card-title>
 
             <v-card-text>
-              <p>Catégorie</p>
+              <p>{{ $t('general.category') }}</p>
               <v-select
                 chips
                 multiple
@@ -58,7 +57,7 @@
                 label="Immobilier"
               ></v-select>
 
-              <p>Classe d'actifs</p>
+              <p>{{ $t('general.assetType') }}</p>
               <v-select
                 chips
                 multiple
@@ -66,7 +65,7 @@
                 label="Exploitation"
               ></v-select>
 
-              <p>Secteurs d'activité</p>
+              <p>{{ $t('general.sector') }}</p>
               <v-select
                 chips
                 multiple
@@ -81,9 +80,9 @@
 
             <v-card-actions>
               <v-row align="center" justify="center">
-                <v-btn @click="openFilter = false" color="primary"
-                  >Filtrer ma recherche</v-btn
-                >
+                <v-btn @click="openFilter = false" color="primary">{{
+                  $t('general.filterSearch')
+                }}</v-btn>
               </v-row>
             </v-card-actions>
           </v-card>
@@ -91,11 +90,11 @@
 
         <v-data-table
           dense
-          no-data-text="Aucune données pour le moment"
-          no-results-text="Aucune données dans la recherche"
+          :no-data-text="$t('general.noData')"
+          :no-results-text="$t('general.noData')"
           sortBy="name"
           :loading="loading"
-          loading-text="Loading... Please wait"
+          :loading-text="$t('general.loading')"
           :headers="headers"
           :items="getFilterDesserts"
           :items-per-page="1000"
@@ -144,11 +143,11 @@
           </template>
 
           <template v-slot:no-results>
-            Aucun résultat trouvé
+            {{ $t('general.noData') }}
           </template>
 
           <template v-slot:no-data>
-            Aucun résultat
+            {{ $t('general.noData') }}
           </template>
 
           <template v-slot:item.name="{ item }">
@@ -163,24 +162,73 @@
 <script>
 import AlphabetSort from '../partials/AlphabetSort';
 import countBy from 'lodash/countBy';
-import { desserts, headers } from '../../data/datas';
+import { desserts } from '../../data/datas';
 export default {
   created() {
     setTimeout(() => (this.loading = false), 2000);
     setTimeout(() => (this.desserts = desserts), 1500);
+
   },
   data: () => ({
     search: '',
     loading: true,
     openFilter: false,
     components: ['*', 'Cream', 'Yogurt', 'Frozen', 'Ice'],
-    headers: headers,
     desserts: [],
   }),
   components: {
     AlphabetSort,
   },
   computed: {
+    headers(){
+      return [
+      {
+        text: this.$t('general.nom'),
+        align: 'start',
+        sortable: true,
+        value: 'name',
+      },
+      {
+        text: this.$t('general.assetType'),
+        class: 'font-weight-black headtitle',
+        value: 'calories',
+        align: 'left',
+      },
+      {
+        text: this.$t('general.category'),
+        value: 'fat',
+        class: 'font-weight-black headtitle',
+        align: 'left',
+      },
+      {
+        text: this.$t('general.sector'),
+        value: 'carbs',
+        class: 'font-weight-black headtitle',
+        align: 'left',
+      },
+      {
+        text: 'ODD',
+        value: 'protein',
+        sortable: true,
+        class: 'font-weight-black headtitle item odd',
+        align: 'center',
+      },
+      {
+        text: this.$t('general.controversies'),
+        value: 'iron',
+        sortable: true,
+        class: 'font-weight-black headtitle item contreverse',
+        align: 'center',
+      },
+      {
+        text: this.$t('general.globalScore'),
+        value: 'note',
+        sortable: true,
+        class: 'font-weight-black headtitle item noteg',
+        align: 'center',
+      },
+    ];
+    },
     getFilterDesserts() {
       if (this.search && this.search.length >= 3) {
         let rex = new RegExp(this.search, 'ig');

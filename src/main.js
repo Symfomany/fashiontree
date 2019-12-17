@@ -21,14 +21,12 @@ const loadLocaleMessages = () => {
     if (matched && matched.length > 1) {
       const locale = matched[1];
       messages[locale] = locales(key);
-      console.log(messages);
     }
   });
   return messages;
 };
 
 let locale = navigator.language;
-console.log(locale);
 const i18n = new VueI18n({
   fallbackLocale: 'fr',
   locale: locale,

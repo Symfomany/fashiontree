@@ -21,24 +21,24 @@
 
           <div class="ma-2">
             <v-btn right rounded large color="primary" big
-              ><v-icon left>cloud_download</v-icon> Export</v-btn
+              ><v-icon left>cloud_download</v-icon>  {{ $t('general.export') }}</v-btn
             >
           </div>
         </v-row>
 
         <v-tabs v-model="tab" :centered="true" :grow="true">
           <v-tab key="performance"
-            ><v-icon left>show_chart</v-icon> Performance ESG</v-tab
+            ><v-icon left>show_chart</v-icon>{{ $t('general.ESGPerformance') }}</v-tab
           >
           <v-tab key="infos"><v-icon left>info</v-icon> Infos</v-tab>
           <v-tab key="investissement"
-            ><v-icon left>euro_symbol</v-icon> Investissement thématique</v-tab
+            ><v-icon left>euro_symbol</v-icon> {{ $t('general.investissementThemathique') }}</v-tab
           >
           <v-tab key="contreverse"
-            ><v-icon left>notification_important</v-icon> Contreverse</v-tab
+            ><v-icon left>notification_important</v-icon> {{ $t('general.controversies') }}</v-tab
           >
           <v-tab key="societes"
-            ><v-icon left>location_city</v-icon> Sociétés paires</v-tab
+            ><v-icon left>location_city</v-icon> {{ $t('general.peerGroup') }}</v-tab
           >
         </v-tabs>
 
@@ -48,7 +48,7 @@
               <v-row no-gutters justify="center" align="center">
                 <v-card class="mx-auto blueShadow">
                   <v-card-title
-                    ><v-icon left>trending_up</v-icon> Tendance</v-card-title
+                    ><v-icon left>trending_up</v-icon> {{ $t('general.trends') }}</v-card-title
                   >
                   <apexcharts
                     width="490"
@@ -59,7 +59,7 @@
                 </v-card>
                 <v-card class="mx-auto blueShadow">
                   <v-card-title
-                    ><v-icon left>track_changes</v-icon> Benchmark</v-card-title
+                    ><v-icon left>track_changes</v-icon> {{ $t('general.benchmark') }}</v-card-title
                   >
                   <apexcharts
                     width="490"
@@ -73,7 +73,7 @@
               <v-row no-gutters justify="center" align="center">
                 <v-card class="mx-auto blueShadow">
                   <v-card-title
-                    ><v-icon left>search</v-icon> Détail</v-card-title
+                    ><v-icon left>search</v-icon> {{ $t('general.details') }}</v-card-title
                   >
                   <v-data-table
                     disable-filtering
@@ -82,7 +82,6 @@
                     no-data-text
                     :headers="headers"
                     :items="desserts"
-                    item-key="name"
                     group-by="category"
                     class="elevation-1"
                   >
@@ -125,28 +124,28 @@
                       </td>
                     </template>
 
-                    <template v-slot:header.2016="{ item }">
+                    <template v-slot:header.2016>
                       <th class="subtitle-1 odd white--text font-weight-bold">
                         2016
                       </th>
                     </template>
-                    <template v-slot:header.2017="{ item }">
+                    <template v-slot:header.2017>
                       <th
                         class="subtitle-1 contreverse white--text font-weight-bold"
                       >
                         2016
                       </th>
                     </template>
-                    <template v-slot:header.2018="{ item }">
+                    <template v-slot:header.2018>
                       <th class="subtitle-1 noteg white--text font-weight-bold">
                         2016
                       </th>
                     </template>
-                    <template v-slot:header.benchmark="{ item }">
+                    <template v-slot:header.benchmark>
                       <th
                         class="subtitle-1 pink lighten-2 white--text font-weight-bold"
                       >
-                        Benchmark
+                        {{ $t('general.benchmark') }}
                       </th>
                     </template>
                   </v-data-table>
@@ -155,15 +154,15 @@
                     <v-row row>
                       <v-col
                         ><v-icon :color="colorsSpeed[1]" right>speed</v-icon>
-                        Non favorable</v-col
+                        {{ $t('general.belowBenchmark') }}</v-col
                       >
                       <v-col
                         ><v-icon :color="colorsSpeed[0]" right>speed</v-icon>
-                        Neutre</v-col
+                        {{ $t('general.inlineBenchmark') }}</v-col
                       >
                       <v-col
                         ><v-icon :color="colorsSpeed[2]" right>speed</v-icon>
-                        Favorable</v-col
+                        {{ $t('general.aboveBenchmark') }}</v-col
                       >
                     </v-row>
                   </v-card-actions>
@@ -175,7 +174,7 @@
                   <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
                       <v-btn transparent v-on="on">
-                        <v-icon left>account_balance</v-icon> Mentions Légales
+                        <v-icon left>account_balance</v-icon> {{ $t("general.legalNotice")}}
                       </v-btn>
                     </template>
                     <v-card>
@@ -295,14 +294,14 @@
           <v-tab-item key="investissement">
             <v-container>
               <v-col cols="12">
-                <p>Investissement</p>
+                <p>{{ $t("general.investment")}}</p>
               </v-col>
             </v-container>
           </v-tab-item>
           <v-tab-item key="contreverse">
             <v-container>
               <v-col cols="12">
-                <p>Contreverse</p>
+                <p>{{ $t("general.controversies")}}</p>
               </v-col>
             </v-container>
           </v-tab-item>
@@ -389,7 +388,7 @@
               <v-spacer></v-spacer>
               <v-toolbar-items>
                 <v-btn dark text @click="dialogTwo = false"
-                  >Fermer cette fenêtre</v-btn
+                  >{{ $t("general.close") }}</v-btn
                 >
               </v-toolbar-items>
             </v-toolbar>
@@ -545,7 +544,7 @@
                 transition="slide-y-transition"
               >
                 <v-card width="500" class="borderBlue">
-                  <v-card-title> Commentaire de l'analyste</v-card-title>
+                  <v-card-title> {{ $t("general.comment")}}</v-card-title>
 
                   <v-card-text>
                     <v-icon left>record_voice_over</v-icon> Lorem ipsum dolor

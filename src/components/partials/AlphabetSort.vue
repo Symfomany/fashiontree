@@ -38,7 +38,7 @@ export default {
       let obj = { ...this.occurences };
       let sum = 120;
       for (let i in obj) {
-        sum += obj[i] * 48;
+        sum += obj[i] * 64;
         obj[i] = sum;
       }
 
@@ -59,10 +59,10 @@ export default {
 
       for (let i in this.occurences) {
         if (i < letter.toUpperCase()) {
-          sum += this.occurences[i] * 48;
+          sum += this.occurences[i] * 64;
         }
       }
-      window.scrollTo(0, 270 + sum);
+      window.scrollTo(0, 220 + sum);
     },
     handleScroll() {
       if (window.pageYOffset > 160) {

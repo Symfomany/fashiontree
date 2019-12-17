@@ -3,13 +3,7 @@
     <v-container>
       <v-layout>
         <v-row class="d-flex ml-1 justify-space-between">
-          <h3 class="display-1">Couverture</h3>
-          <p>{{ $t('hello') }}</p>
-          Langue:<select v-model="$i18n.locale">
-            <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang"
-              >Test{{ lang }}</option
-            >
-          </select>
+          <h3 class="display-1">{{ $t('general.coverage') }}</h3>
 
           <v-menu
             v-model="openExport"
@@ -25,7 +19,8 @@
                 color="primary"
                 big
                 v-on="on"
-                ><v-icon left>cloud_download</v-icon> Export</v-btn
+                ><v-icon left>cloud_download</v-icon>
+                {{ $t('general.export') }}</v-btn
               >
             </template>
             <v-card
@@ -33,7 +28,7 @@
               class="mx-auto borderBlue"
               max-width="500"
             >
-              <v-card-title>Options d'Export </v-card-title>
+              <v-card-title>{{ $t('general.export') }} </v-card-title>
 
               <v-card-text>
                 <p>Dernière année collectée</p>
@@ -143,7 +138,6 @@ export default {
     Listing,
   },
   data: () => ({
-    langs: ['fr-FR', 'en-EN'],
     items: [
       {
         text: 'Liste des couvertures',

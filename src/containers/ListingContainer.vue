@@ -56,7 +56,7 @@
 
                 <p>Langue</p>
                 <v-select
-                  :items="['Français', 'Anglais', 'Espagnol', 'Allemand']"
+                  :items="['Français', 'Anglais']"
                   label="Français"
                 ></v-select>
 

@@ -1,4 +1,4 @@
-# fashionstore3000
+# Front of PubDyn
 
 ## Project setup
 ```

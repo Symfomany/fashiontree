@@ -465,7 +465,7 @@
                         Commentaire de l'analyste</v-card-title>
 
                       <v-card-text>
-                        <v-icon left>create</v-icon> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis faucibus eros, eu finibus ligula. Maecenas non tortor quis elit elementum venenatis. Aenean mauris justo, laoreet malesuada tincidunt in, consequat non purus. Donec porttitor molestie tortor, a scelerisque ex condimentum sit amet. Sed ultricies leo maximus mi pellentesque commodo. Praesent ut dui quis justo accumsan elementum. Integer metus enim, semper at consequat eu, venenatis sed erat. Maecenas ipsum lacus, malesuada ut scelerisque at, lacinia eu lectus. Duis vitae venenatis turpis. Vestibulum id pellentesque sem.
+                        <v-icon left>record_voice_over</v-icon> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis faucibus eros, eu finibus ligula. Maecenas non tortor quis elit elementum venenatis. Aenean mauris justo, laoreet malesuada tincidunt in, consequat non purus. Donec porttitor molestie tortor, a scelerisque ex condimentum sit amet. Sed ultricies leo maximus mi pellentesque commodo. Praesent ut dui quis justo accumsan elementum. Integer metus enim, semper at consequat eu, venenatis sed erat. Maecenas ipsum lacus, malesuada ut scelerisque at, lacinia eu lectus. Duis vitae venenatis turpis. Vestibulum id pellentesque sem.
                       </v-card-text>
 
                     </v-card>

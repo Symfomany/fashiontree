@@ -1,15 +1,18 @@
 <template>
   <v-row>
+    
+         
     <v-col cols="1">
       <AlphabetSort :occurences="getOcc" />
     </v-col>
     <v-col :cols="isMobile() ? 12 : 11">
       <v-card>
-        <v-card-title>
-          <span class="bold"
+        <v-card-title class="mb-n6">
+          <span class="bold" v-if="getFilterDesserts.length"
             >{{ getFilterDesserts.length + ' résultats de recherche entreprises' }}
           </span>
           <v-spacer></v-spacer>
+        <v-row>
           <v-autocomplete
             v-model="search"
             no-data-text="Aucune suggestion à proposer"
@@ -18,10 +21,70 @@
             append-icon="search"
             label="Rechercher un nom, un ISN, un SIRET..."
             :items="components"
-          ></v-autocomplete>
+            block
+          ></v-autocomplete > 
+        </v-row>
         </v-card-title>
+    
+      <v-menu      
+            v-model="openFilter"
+            max-width="400"
+            :close-on-content-click="false"
+            transition="slide-y-transition"
+          >
+        <template v-slot:activator="{ on }">
+
+         <v-row no-gutters class="ml-3">
+          <v-btn ref="filter" @click="openFilter = true" color="blue" class="white--text"><v-icon left>filter_list</v-icon> Filtrer la recherche</v-btn>
+        </v-row>
+        </template>
+       
+            <v-card
+            
+              class="borderBlue"
+            >
+              <v-card-title>Filtrer la recherche</v-card-title>
+
+              <v-card-text>
+                <p>Catégorie</p>
+                <v-select
+                chips
+                multiple
+                  :items="['Immobilier', 'Exploitation', 'Medical', 'Domestique']"
+                  label="Immobilier"
+                ></v-select>
+
+                <p>Classe d'actifs</p>
+                <v-select
+                chips
+                multiple
+                  :items="['Exploitation', 'Medical', 'Domestique']"
+                  label="Exploitation"
+                ></v-select>
+
+               
+                <p>Secteurs d'activité</p>
+                <v-select
+                chips
+                multiple
+                  :items="['Immobilier commerce', 'Immobilier medical', 'Immobilier logistique']"
+                  label="Immobilier commerce"
+                ></v-select>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-row align="center" justify="center">
+                  <v-btn @click="openFilter = false" color="primary"
+                    >Filtrer ma recherche</v-btn>
+                </v-row>
+              </v-card-actions>
+            </v-card>
+          </v-menu>
+        
         <v-data-table
           dense
+          no-data-text="Aucune données pour le moment"
+          no-results-text="Aucune données dans la recherche"
           sortBy="name"
           :loading="loading"
           loading-text="Loading... Please wait"
@@ -86,6 +149,7 @@
         </v-data-table>
       </v-card>
     </v-col>
+    
   </v-row>
 </template>
 
@@ -96,10 +160,13 @@ import { desserts, headers } from '../../data/datas';
 export default {
   created() {
     setTimeout(() => (this.loading = false), 2000);
+    setTimeout(() => this.desserts = desserts, 1500);
+    
   },
   data: () => ({
     search: '',
     loading: true,
+    openFilter: false,
     components: [
       '*',
       'sandwitch',
@@ -109,7 +176,7 @@ export default {
       'Ice',
     ],
     headers: headers,
-    desserts: desserts,
+    desserts: [],
   }),
   components: {
     AlphabetSort,

@@ -7,7 +7,8 @@ const  cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv');
 const  cors = require('cors');
- 
+const fs = require('fs')
+
 dotenv.config();
 
 
@@ -70,8 +71,13 @@ app.post('/login', async(req, res) => {
     } catch (error) {
         res.status(400).send(error)
     }
+});
 
-})
+app.get('/pdf', async(req,res) => {
+    const data =fs.readFileSync('./financier.pdf');
+    res.contentType("application/pdf");
+    res.send(data);
+});
 
   
 app.listen(3000, function () {

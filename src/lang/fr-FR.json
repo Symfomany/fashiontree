@@ -51,6 +51,7 @@
         "referenciel": "referenciel",
         "phone": "Téléphone",
         "noData": "Aucune donnée pour le moment",
+        "noSuggest": "Aucune suggestion correspondante",
         "loading": "Chargement...Veillez patientez"
     }
     

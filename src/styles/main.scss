@@ -37,6 +37,14 @@ html {
   border-top: 8px solid #2196f3;
 }
 
+
+.detailTable tr td:nth-child(4){
+  background-color: rgba($color: #2196f3, $alpha: 0.1) !important;
+  border-left: 1px solid #2196f3;
+  border-right: 1px solid #2196f3;
+}
+
+
 .tooltip {
     
     display: block !important;

@@ -22,6 +22,10 @@ export default {
   },
 
   actions: {
+    download(state) {
+      console.log(state)
+      return xhr.get(`/pdf`);
+    },
     login(state, { login, password }) {
       return xhr.post(`/login`, {
         login,

@@ -50,7 +50,8 @@
         "phone": "Phone",
         "noData": "No data for the moment",
         "loading": "Loading...Please wait",
-        "nom": "Name"
+        "nom": "Name",
+        "noSuggest": "No suggestion"
     }
     
 }

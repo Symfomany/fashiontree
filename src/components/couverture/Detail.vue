@@ -83,7 +83,7 @@
                     :headers="headers"
                     :items="desserts"
                     group-by="category"
-                    class="elevation-1"
+                    class="elevation-1 detailTable"
                   >
                     <template
                       class="align-center"
@@ -133,12 +133,12 @@
                       <th
                         class="subtitle-1 contreverse white--text font-weight-bold"
                       >
-                        2016
+                        2017
                       </th>
                     </template>
                     <template v-slot:header.2018>
                       <th class="subtitle-1 noteg white--text font-weight-bold">
-                        2016
+                        2018
                       </th>
                     </template>
                     <template v-slot:header.benchmark>
@@ -666,8 +666,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+
 .theme--light.v-data-table thead tr:last-child th {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
+
+
 </style>

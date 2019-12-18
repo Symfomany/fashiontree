@@ -6,7 +6,7 @@
       :key="letter"
       v-for="letter in filtersLetters"
     >
-      {{ letter }} <small> ({{ occurences[letter.toUpperCase()] }})</small>
+      {{ letter }}
     </li>
   </ul>
 </template>

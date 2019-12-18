@@ -12,15 +12,37 @@
           <v-spacer></v-spacer>
           <v-row>
             <v-autocomplete
-              v-model="search"
-              no-data-text="Aucune suggestion à proposer"
+              @input="changed"
+              dense
+              :filter="customFilter"
+              :label="$t('general.searchCompany')"
+              :no-data-text="$t('general.noSuggest')"
               solo
               clearable
+              auto-select-first
               append-icon="search"
-              :label="$t('general.searchCompany')"
-              :items="components"
+              small-chips
+              deletable-chips
+              chips
+              :items="companies"
+              return-object
+              item-value="name"
+              :item-text="(item) => `${item.name} (${item.isin})`"
               block
-            ></v-autocomplete>
+            >
+             <!-- <template v-slot:selection="{ item }">
+                  <v-chip color="blue">{{ item ? item.name : ''}}</v-chip>
+                </template> -->
+                
+              <template v-slot:item="{ item }">
+                  <span left>{{ item.name }}</span>
+                  <v-spacer></v-spacer>
+                  <span class="grey--text" right>
+                    {{ item.isin }}
+                  </span>
+              </template>
+
+            </v-autocomplete>
           </v-row>
         </v-card-title>
 
@@ -51,40 +73,31 @@
             <v-card-text>
               <p>{{ $t('general.category') }}</p>
               <v-select
+                v-model="category"
                 chips
                 multiple
-                :items="['Immobilier', 'Exploitation', 'Medical', 'Domestique']"
-                label="Immobilier"
+                :items="initialCategory"
+                label="Choisir une catégory"
               ></v-select>
 
               <p>{{ $t('general.assetType') }}</p>
               <v-select
+                v-model="assetType"
                 chips
                 multiple
-                :items="['Exploitation', 'Medical', 'Domestique']"
-                label="Exploitation"
+                :items="initialAsset"
+                label="Choisir une classe actif"
               ></v-select>
 
               <p>{{ $t('general.sector') }}</p>
               <v-select
+              v-model="sector"
                 chips
                 multiple
-                :items="[
-                  'Immobilier commerce',
-                  'Immobilier medical',
-                  'Immobilier logistique',
-                ]"
-                label="Immobilier commerce"
+                :items="initialSector"
+                label="Choisir un secteur d'activité"
               ></v-select>
             </v-card-text>
-
-            <v-card-actions>
-              <v-row align="center" justify="center">
-                <v-btn @click="openFilter = false" color="primary">{{
-                  $t('general.filterSearch')
-                }}</v-btn>
-              </v-row>
-            </v-card-actions>
           </v-card>
         </v-menu>
 
@@ -111,24 +124,24 @@
                 </td>
                 <td>
                   {{
-                    item.calories.charAt(0).toUpperCase() +
-                      item.calories.slice(1)
+                    item.category.charAt(0).toUpperCase() +
+                      item.category.slice(1)
                   }}
                 </td>
                 <td>
-                  {{ item.fat.charAt(0).toUpperCase() + item.fat.slice(1) }}
+                  {{ item.assettype.charAt(0).toUpperCase() + item.assettype.slice(1) }}
                 </td>
                 <td>
-                  {{ item.carbs.charAt(0).toUpperCase() + item.carbs.slice(1) }}
+                  {{ item.sector.charAt(0).toUpperCase() + item.sector.slice(1) }}
                 </td>
                 <td style="text-align:center">
-                  <span :class="`${getOdd(item.protein)}--text subtitle-1`">{{
-                    item.protein.charAt(0).toUpperCase() + item.protein.slice(1)
+                  <span :class="`${getOdd(item.odd)}--text subtitle-1`">{{
+                    item.odd.charAt(0).toUpperCase() + item.odd.slice(1)
                   }}</span>
                 </td>
                 <td style="text-align:center">
-                  <v-chip label :class="`white--text ${getIron(item.iron)}`">
-                    {{ item.iron }}</v-chip
+                  <v-chip label :class="`white--text ${getContreverse(item.contreverse)}`">
+                    {{ item.contreverse }}</v-chip
                   >
                 </td>
                 <td style="text-align:center">
@@ -166,14 +179,74 @@ import { desserts } from '../../data/datas';
 export default {
   created() {
     setTimeout(() => (this.loading = false), 2000);
-    setTimeout(() => (this.desserts = desserts), 1500);
+    setTimeout(() => {
+      (this.desserts = desserts)
+      this.initialCategory = this.desserts.map((elt) => elt.category.charAt(0).toUpperCase() + elt.category.slice(1))
+      this.initialSector = this.desserts.map((elt) => elt.sector.charAt(0).toUpperCase() + elt.sector.slice(1))
+      this.initialAsset = this.desserts.map((elt) => elt.assettype.charAt(0).toUpperCase() + elt.assettype.slice(1))
+    }, 1500);
 
   },
   data: () => ({
+    initialCategory: [],
+    initialAsset: [],
+    initialSector: [],
+    category: [],
+    assetType: [],
+    sector: [],
     search: '',
     loading: true,
     openFilter: false,
-    components: ['*', 'Cream', 'Yogurt', 'Frozen', 'Ice'],
+    companies: [
+      {
+        name: "BNP Paribas",
+        isin: "FR2798564212"
+      },
+      {
+        name: "Accor Hotel",
+        isin: "FR1728365467"
+      },
+      {
+        name: "Bouygues Immobilier",
+        isin: "FR2738364408"
+      },
+      {
+        name: "Cofidis",
+        isin: "FR1728974508"
+      },
+      {
+        name: "SFR",
+        isin: "FR2738775512"
+      },
+      {
+        name: "Orange",
+        isin: "FR1732776506"
+      },
+      {
+        name: "Mercedes-Benz",
+        isin: "FR2771796636"
+      },
+      {
+        name: "Peugeot",
+        isin: "FR6751592336"
+      },
+      {
+        name: "Alstom",
+        isin: "FR6752572550"
+      },
+      {
+        name: "Air Liquide",
+        isin: "FR1738574598"
+      },
+      {
+        name: "Areva",
+        isin: "FR7788554526"
+      },
+      {
+        name: "Axa",
+        isin: "FR8768452519"
+      },
+    ],
     desserts: [],
   }),
   components: {
@@ -191,31 +264,31 @@ export default {
       {
         text: this.$t('general.assetType'),
         class: 'font-weight-black headtitle',
-        value: 'calories',
+        value: 'category',
         align: 'left',
       },
       {
         text: this.$t('general.category'),
-        value: 'fat',
+        value: 'assettype',
         class: 'font-weight-black headtitle',
         align: 'left',
       },
       {
         text: this.$t('general.sector'),
-        value: 'carbs',
+        value: 'sector',
         class: 'font-weight-black headtitle',
         align: 'left',
       },
       {
         text: 'ODD',
-        value: 'protein',
+        value: 'odd',
         sortable: true,
         class: 'font-weight-black headtitle item odd',
         align: 'center',
       },
       {
         text: this.$t('general.controversies'),
-        value: 'iron',
+        value: 'contreverse',
         sortable: true,
         class: 'font-weight-black headtitle item contreverse',
         align: 'center',
@@ -230,9 +303,27 @@ export default {
     ];
     },
     getFilterDesserts() {
-      if (this.search && this.search.length >= 3) {
-        let rex = new RegExp(this.search, 'ig');
-        return this.desserts.filter(dessert => rex.test(dessert.name));
+      const categories = this.category.map((elt) => typeof(elt) == "string" ? elt.toLowerCase() : null)
+        const sectors = this.sector.map((elt) => typeof(elt) == "string" ? elt.toLowerCase() : null)
+        const assetTypes =  this.assetType.map((elt) => typeof(elt) == "string" ? elt.toLowerCase() : null)
+        let results = this.desserts;
+        
+      if (this.search.length >= 3 ||  categories.length ||  sectors.length || assetTypes.length)  {
+        
+        if(this.search.length >= 3 ){
+          let rex = new RegExp(this.search, 'ig');
+          results = this.desserts.filter(dessert => rex.test(dessert.name));
+        }
+       if(categories.length){
+        results = results.filter((elt) => categories.includes(elt.category.toLowerCase()))
+       }
+       if(sectors.length){
+        results = results.filter((elt) => sectors.includes(elt.sector.toLowerCase()))
+       }
+       if(assetTypes.length){
+        results = results.filter((elt) => assetTypes.includes(elt.assettype.toLowerCase()))
+       }
+        return results;
       } else {
         return this.desserts;
       }
@@ -249,6 +340,24 @@ export default {
     },
   },
   methods: {
+    filterSearch(){
+      console.log(this.category)
+      console.log(this.sector)
+      console.log(this.assetType)
+      this.openFilter = false
+    },
+    changed(val){
+      this.search  = val && val.name  ? val.name : '';
+    },
+    customFilter(item, queryText) {
+      let textName = item.name ? item.name.toLowerCase() : '';
+      let textISIN = item.isin ? item.isin.toLowerCase() : '';
+      let searchText = queryText.toLowerCase();
+      return (
+          textName.indexOf(searchText) > -1 || textISIN.indexOf(searchText) > -1
+      );
+    },
+
     goDetail(item, index) {
       this.$router.push({ name: 'detail', params: { id: index } });
     },
@@ -275,7 +384,7 @@ export default {
           return 'ont-weight-regular  ';
       }
     },
-    getIron(val) {
+    getContreverse(val) {
       switch (val) {
         case 5:
           return 'font-weight-black red';

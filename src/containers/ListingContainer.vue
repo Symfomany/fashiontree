@@ -169,6 +169,7 @@ export default {
   computed: {},
   methods: {
     closeExport() {
+      //this.$store.dispatch('user/download');
       setTimeout(() => {
         this.openExport = false;
         this.loading = false;

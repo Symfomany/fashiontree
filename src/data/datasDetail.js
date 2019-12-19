@@ -263,6 +263,27 @@ export const entreprises = [
       },
 
       {
+        title: 'Labelisation et certification',
+        note: {
+          2016: 20,
+          2017: 40,
+          2018: 90,
+        },
+        benchmark: 20,
+        subfamilles: [
+          {
+            title: 'Labelisation et certification',
+            note: {
+              2016: 80,
+              2017: 50,
+              2018: 40,
+            },
+            benchmark: 58,
+          },
+        ],
+      },
+
+      {
         title: 'Social',
         note: {
           2016: 30,

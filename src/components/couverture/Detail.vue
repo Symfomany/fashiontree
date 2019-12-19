@@ -537,7 +537,12 @@ export default {
     const benchmarkNotes = entreprise.familles.map(
       famille => famille.benchmark,
     );
-    console.log(benchmarkNotes);
+
+    const societesNotes = entreprise.familles.map(
+      famille => famille.note[2018],
+    );
+
+    console.log(societesNotes, benchmarkNotes);
 
     this.seriesTwo = [
       {
@@ -546,7 +551,7 @@ export default {
       },
       {
         name: entreprise.name,
-        data: [100, 90, 60, 20],
+        data: [...societesNotes],
       },
     ];
   },

@@ -48,11 +48,18 @@
         "french": "Français",
         "english": "Anglais",
         "typeExport": "Type d'export",
-        "referenciel": "referenciel",
+        "referenciel": "Referenciel",
         "phone": "Téléphone",
         "noData": "Aucune donnée pour le moment",
         "noSuggest": "Aucune suggestion correspondante",
-        "loading": "Chargement...Veillez patientez"
+        "loading": "Chargement...Veillez patientez",
+        "pull": "remonter",
+        "exportBtn": "Exporter le rendu",
+        "lastyear": "Dernière annnée connectée",
+        "chooseCategory": "Choisissez une catégorie",
+        "chooseSector": "Choisissez un secteur d'activité",
+        "chooseAsset": "Choisissez une classe d'actif",
+        "resetFilter": "Réinitialiser les filtres"
     }
     
 }

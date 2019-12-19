@@ -26,6 +26,7 @@
         "trends": "Trend",
         "benchmark": "Benchmark",
         "year": "Year",
+        "lastyear": "Last year collected",
         "details": "Details",
         "legend": "Legend",
         "aboveBenchmark": "Above benchmark",
@@ -46,12 +47,18 @@
         "french": "French",
         "english": "English",
         "typeExport": "Type Export",
-        "referenciel": "framework",
+        "referenciel": "Framework",
         "phone": "Phone",
         "noData": "No data for the moment",
         "loading": "Loading...Please wait",
         "nom": "Name",
-        "noSuggest": "No suggestion"
+        "noSuggest": "No suggestion",
+        "pull": "scroll up",
+        "exportBtn": "Exporter the render",
+        "resetFilter": "Reset filters",
+        "chooseCategory": "Choose a category",
+        "chooseSector": "Choose a sector",
+        "chooseAsset": "Choose an asset type"
     }
     
 }

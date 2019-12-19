@@ -27,6 +27,10 @@ const loadLocaleMessages = () => {
 };
 
 let locale = navigator.language;
+if(locale && locale.length === 2){ // hack for Firefox
+  locale = locale + '-' + locale.toUpperCase();
+}
+console.log(locale)
 const i18n = new VueI18n({
   fallbackLocale: 'fr',
   locale: locale,

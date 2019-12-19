@@ -31,7 +31,7 @@
               <v-card-title>{{ $t('general.export') }} </v-card-title>
 
               <v-card-text>
-                <p>Dernière année collectée</p>
+                <p>{{ $t('general.lastyear') }}</p>
                 <v-row justify="space-around">
                   <v-switch
                     class="mx-2"
@@ -59,13 +59,13 @@
                   ></v-switch>
                 </v-row>
 
-                <p>Langue</p>
+                <p>{{ $t('general.language') }}</p>
                 <v-select
                   :items="['Français', 'Anglais']"
                   label="Français"
                 ></v-select>
 
-                <p>Type d'export</p>
+                <p>{{ $t('general.typeExport') }}</p>
                 <v-row no-gutters>
                   <v-radio-group row>
                     <v-radio
@@ -83,7 +83,7 @@
                   </v-radio-group>
                 </v-row>
 
-                <p>Référenciel</p>
+                <p>{{ $t('general.referenciel') }}</p>
                 <v-select
                   :items="[
                     'Gaia rating',
@@ -98,7 +98,7 @@
               <v-card-actions>
                 <v-row align="center" justify="center">
                   <v-btn @click="closeExport" color="primary"
-                    >Exporter le rendu</v-btn
+                    >{{ $t('general.exportBtn') }}</v-btn
                   >
                 </v-row>
               </v-card-actions>
@@ -121,7 +121,7 @@
             <v-avatar left>
               <v-icon>arrow_drop_up</v-icon>
             </v-avatar>
-            Remonter
+            {{ $t('general.pull') }}
           </v-chip>
           <Listing />
         </v-col>

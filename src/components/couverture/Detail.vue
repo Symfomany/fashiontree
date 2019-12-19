@@ -1,45 +1,47 @@
 <template>
   <v-container>
     <v-layout>
-      <v-card
-        outlined
-        :loading="loading"
-        class="borderBlue mx-auto"
-        min-width="100%"
-      >
+      <v-card outlined :loading="loading" class="borderBlue mx-auto" min-width="100%">
         <v-row no-gutters>
           <v-avatar class="ma-2" color="blue" size="62">
-            <span class="white--text headline">162</span>
+            <span class="white--text headline">{{ entreprise.noteG }}</span>
           </v-avatar>
 
           <div class="mx-auto">
-            <v-card-title
-              ><span>Ephad les hespérides des monts d'or</span>
+            <v-card-title>
+              <span>{{ entreprise.name }}</span>
             </v-card-title>
-            <v-card-subtitle>Immobilier Hébergement</v-card-subtitle>
+            <v-card-subtitle>{{ entreprise.sector }}</v-card-subtitle>
           </div>
 
           <div class="ma-2">
-            <v-btn right rounded large color="primary" big
-              ><v-icon left>cloud_download</v-icon>  {{ $t('general.export') }}</v-btn
-            >
+            <v-btn right rounded large color="primary" big>
+              <v-icon left>cloud_download</v-icon>
+              {{ $t('general.export') }}
+            </v-btn>
           </div>
         </v-row>
 
         <v-tabs v-model="tab" :centered="true" :grow="true">
-          <v-tab key="performance"
-            ><v-icon left>show_chart</v-icon>{{ $t('general.ESGPerformance') }}</v-tab
-          >
-          <v-tab key="infos"><v-icon left>info</v-icon> Infos</v-tab>
-          <v-tab key="investissement"
-            ><v-icon left>euro_symbol</v-icon> {{ $t('general.investissementThemathique') }}</v-tab
-          >
-          <v-tab key="contreverse"
-            ><v-icon left>notification_important</v-icon> {{ $t('general.controversies') }}</v-tab
-          >
-          <v-tab key="societes"
-            ><v-icon left>location_city</v-icon> {{ $t('general.peerGroup') }}</v-tab
-          >
+          <v-tab key="performance">
+            <v-icon left>show_chart</v-icon>
+            {{ $t('general.ESGPerformance') }}
+          </v-tab>
+          <v-tab key="infos">
+            <v-icon left>info</v-icon>Infos
+          </v-tab>
+          <v-tab key="investissement">
+            <v-icon left>euro_symbol</v-icon>
+            {{ $t('general.investissementThemathique') }}
+          </v-tab>
+          <v-tab key="contreverse">
+            <v-icon left>notification_important</v-icon>
+            {{ $t('general.controversies') }}
+          </v-tab>
+          <v-tab key="societes">
+            <v-icon left>location_city</v-icon>
+            {{ $t('general.peerGroup') }}
+          </v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="tab">
@@ -47,34 +49,27 @@
             <v-card-text>
               <v-row no-gutters justify="center" align="center">
                 <v-card class="mx-auto blueShadow">
-                  <v-card-title
-                    ><v-icon left>trending_up</v-icon> {{ $t('general.trends') }}</v-card-title
-                  >
-                  <apexcharts
-                    width="490"
-                    type="bar"
-                    :options="options"
-                    :series="series"
-                  ></apexcharts>
+                  <v-card-title>
+                    <v-icon left>trending_up</v-icon>
+                    {{ $t('general.trends') }}
+                  </v-card-title>
+                  <apexcharts width="490" type="bar" :options="options" :series="series"></apexcharts>
                 </v-card>
                 <v-card class="mx-auto blueShadow">
-                  <v-card-title
-                    ><v-icon left>track_changes</v-icon> {{ $t('general.benchmark') }}</v-card-title
-                  >
-                  <apexcharts
-                    width="490"
-                    type="radar"
-                    :options="optionsTwo"
-                    :series="seriesTwo"
-                  ></apexcharts>
+                  <v-card-title>
+                    <v-icon left>track_changes</v-icon>
+                    {{ $t('general.benchmark') }}
+                  </v-card-title>
+                  <apexcharts width="490" type="radar" :options="optionsTwo" :series="seriesTwo"></apexcharts>
                 </v-card>
               </v-row>
               <br />
               <v-row no-gutters justify="center" align="center">
                 <v-card class="mx-auto blueShadow">
-                  <v-card-title
-                    ><v-icon left>search</v-icon> {{ $t('general.details') }}</v-card-title
-                  >
+                  <v-card-title>
+                    <v-icon left>search</v-icon>
+                    {{ $t('general.details') }}
+                  </v-card-title>
                   <v-data-table
                     disable-filtering
                     disable-pagination
@@ -85,85 +80,62 @@
                     group-by="category"
                     class="elevation-1 detailTable"
                   >
-                    <template
-                      class="align-center"
-                      v-slot:group.header="{ group }"
-                    >
+                    <template class="align-center" v-slot:group.header="{ group }">
                       <td @click="openQuestions" class="subtitle-1">
-                        <b
-                          ><a class="text--darken-1 grey--text">{{
-                            group
-                          }}</a></b
-                        >
+                        <b>
+                          <a class="text--darken-1 grey--text">{{ group }}</a>
+                        </b>
                       </td>
-                      <td
-                        style="text-align:center; font-size:18px; font-weight:bold"
-                      >
-                        100<v-icon right>trending_up</v-icon>
-                      </td>
-                      <td
-                        style="text-align:center; font-size:18px;font-weight:bold"
-                      >
+                      <td style="text-align:center; font-size:18px; font-weight:bold">
                         100
+                        <v-icon right>trending_up</v-icon>
                       </td>
-                      <td
-                        style="text-align:center; font-size:18px;font-weight:bold"
-                      >
-                        100<v-icon right>trending_down</v-icon>
+                      <td style="text-align:center; font-size:18px;font-weight:bold">100</td>
+                      <td style="text-align:center; font-size:18px;font-weight:bold">
+                        100
+                        <v-icon right>trending_down</v-icon>
                       </td>
-                      <td
-                        style="text-align:center; font-size:18px;font-weight:bold"
-                      >
-                        100<v-icon
+                      <td style="text-align:center; font-size:18px;font-weight:bold">
+                        100
+                        <v-icon
                           :color="
                             colorsSpeed[Math.floor(Math.random() * (4 - 1 + 1))]
                           "
                           right
-                          >speed</v-icon
-                        >
+                        >speed</v-icon>
                       </td>
                     </template>
 
                     <template v-slot:header.2016>
-                      <th class="subtitle-1 odd white--text font-weight-bold">
-                        2016
-                      </th>
+                      <th class="subtitle-1 odd white--text font-weight-bold">2016</th>
                     </template>
                     <template v-slot:header.2017>
-                      <th
-                        class="subtitle-1 contreverse white--text font-weight-bold"
-                      >
-                        2017
-                      </th>
+                      <th class="subtitle-1 contreverse white--text font-weight-bold">2017</th>
                     </template>
                     <template v-slot:header.2018>
-                      <th class="subtitle-1 noteg white--text font-weight-bold">
-                        2018
-                      </th>
+                      <th class="subtitle-1 noteg white--text font-weight-bold">2018</th>
                     </template>
                     <template v-slot:header.benchmark>
                       <th
                         class="subtitle-1 pink lighten-2 white--text font-weight-bold"
-                      >
-                        {{ $t('general.benchmark') }}
-                      </th>
+                      >{{ $t('general.benchmark') }}</th>
                     </template>
                   </v-data-table>
 
                   <v-card-actions>
                     <v-row row>
-                      <v-col
-                        ><v-icon :color="colorsSpeed[1]" right>speed</v-icon>
-                        {{ $t('general.belowBenchmark') }}</v-col
-                      >
-                      <v-col
-                        ><v-icon :color="colorsSpeed[0]" right>speed</v-icon>
-                        {{ $t('general.inlineBenchmark') }}</v-col
-                      >
-                      <v-col
-                        ><v-icon :color="colorsSpeed[2]" right>speed</v-icon>
-                        {{ $t('general.aboveBenchmark') }}</v-col
-                      >
+                      <v-col>
+                        <v-icon :color="colorsSpeed[1]" right>speed</v-icon>
+                        {{ $t('general.belowBenchmark') }}
+                      </v-col>
+                      <v-col>
+                        <v-icon :color="colorsSpeed[0]" right>speed</v-icon>
+                        {{ $t('general.inlineBenchmark') }}
+                      </v-col>
+                      <v-col>
+                        <v-icon :color="colorsSpeed[2]" right>speed</v-icon>
+                        {{ $t('general.aboveBenchmark') }}
+                      </v-col>
                     </v-row>
                   </v-card-actions>
                 </v-card>
@@ -174,16 +146,12 @@
                   <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
                       <v-btn transparent v-on="on">
-                        <v-icon left>account_balance</v-icon> {{ $t("general.legalNotice")}}
+                        <v-icon left>account_balance</v-icon>
+                        {{ $t("general.legalNotice")}}
                       </v-btn>
                     </template>
                     <v-card>
-                      <v-card-title
-                        class="headline grey lighten-2"
-                        primary-title
-                      >
-                        Privacy Policy
-                      </v-card-title>
+                      <v-card-title class="headline grey lighten-2" primary-title>Privacy Policy</v-card-title>
                       <v-card-text>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
@@ -198,9 +166,7 @@
                       <v-divider></v-divider>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="dialog = false">
-                          I accept
-                        </v-btn>
+                        <v-btn color="primary" text @click="dialog = false">I accept</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -215,38 +181,26 @@
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-title>Adresse</v-list-item-title>
-                      <v-list-item-subtitle>
-                        308 Rue de la Liberté, Lyon 69002
-                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>308 Rue de la Liberté, Lyon 69002</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-title>Président</v-list-item-title>
-                      <v-list-item-subtitle>
-                        M. Michel Cochourd
-                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>M. Michel Cochourd</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item two-line>
                     <v-list-item-content>
-                      <v-list-item-title
-                        >Reponsable Relations Investisseurs</v-list-item-title
-                      >
-                      <v-list-item-subtitle>
-                        Mme. Sylvie Cripolt
-                      </v-list-item-subtitle>
+                      <v-list-item-title>Reponsable Relations Investisseurs</v-list-item-title>
+                      <v-list-item-subtitle>Mme. Sylvie Cripolt</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
 
                   <v-list-item two-line>
                     <v-list-item-content>
-                      <v-list-item-title
-                        >Société de communication</v-list-item-title
-                      >
-                      <v-list-item-subtitle>
-                        Agence Braax Publicité, Paris 75002
-                      </v-list-item-subtitle>
+                      <v-list-item-title>Société de communication</v-list-item-title>
+                      <v-list-item-subtitle>Agence Braax Publicité, Paris 75002</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -254,17 +208,13 @@
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-title>Code ISIN</v-list-item-title>
-                      <v-list-item-subtitle>
-                        FR6458643321
-                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>FR6458643321</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-title>Code Bloomberg</v-list-item-title>
-                      <v-list-item-subtitle>
-                        A5DOE41
-                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>A5DOE41</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item two-line>
@@ -282,9 +232,7 @@
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-title>Marches</v-list-item-title>
-                      <v-list-item-subtitle>
-                        Compartiment B
-                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>Compartiment B</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -312,16 +260,10 @@
                   <v-col sm="4">
                     <v-list class="ma-3 pa-8" flat>
                       <v-subheader>Secteur Santé</v-subheader>
-                      <v-list-item-group v-model="item" color="primary">
-                        <v-list-item
-                          v-for="i in 100"
-                          :key="i"
-                          @click="goDetail"
-                        >
+                      <v-list-item-group color="primary">
+                        <v-list-item v-for="i in 100" :key="i" @click="goDetail">
                           <v-list-item-content>
-                            <v-list-item-title
-                              v-html="`Altira`"
-                            ></v-list-item-title>
+                            <v-list-item-title v-html="`Altira`"></v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                       </v-list-item-group>
@@ -331,16 +273,10 @@
                   <v-col sm="4">
                     <v-list flat class="ma-3 pa-8">
                       <v-subheader>Sous-Secteur Biotechnologies</v-subheader>
-                      <v-list-item-group v-model="item" color="primary">
-                        <v-list-item
-                          v-for="i in 100"
-                          :key="i"
-                          @click="goDetail"
-                        >
+                      <v-list-item-group color="primary">
+                        <v-list-item v-for="i in 100" :key="i" @click="goDetail">
                           <v-list-item-content>
-                            <v-list-item-title
-                              v-html="`AB Conseil`"
-                            ></v-list-item-title>
+                            <v-list-item-title v-html="`AB Conseil`"></v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                       </v-list-item-group>
@@ -350,16 +286,10 @@
                   <v-col sm="4">
                     <v-list flat class="ma-3 pa-8">
                       <v-subheader>Pays France</v-subheader>
-                      <v-list-item-group v-model="item" color="primary">
-                        <v-list-item
-                          v-for="i in 100"
-                          :key="i"
-                          @click="goDetail"
-                        >
+                      <v-list-item-group color="primary">
+                        <v-list-item v-for="i in 100" :key="i" @click="goDetail">
                           <v-list-item-content>
-                            <v-list-item-title
-                              v-html="`Biocartis`"
-                            ></v-list-item-title>
+                            <v-list-item-title v-html="`Biocartis`"></v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                       </v-list-item-group>
@@ -373,12 +303,7 @@
       </v-card>
 
       <v-row>
-        <v-dialog
-          v-model="dialogTwo"
-          fullscreen
-          hide-overlay
-          transition="dialog-bottom-transition"
-        >
+        <v-dialog v-model="dialogTwo" fullscreen hide-overlay transition="dialog-bottom-transition">
           <v-card>
             <v-toolbar dark color="primary">
               <v-btn icon dark @click="dialogTwo = false">
@@ -387,14 +312,10 @@
               <v-toolbar-title>Détail</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
-                <v-btn dark text @click="dialogTwo = false"
-                  >{{ $t("general.close") }}</v-btn
-                >
+                <v-btn dark text @click="dialogTwo = false">{{ $t("general.close") }}</v-btn>
               </v-toolbar-items>
             </v-toolbar>
-            <v-card-title
-              >Engagement et politiques ESG des exploitants</v-card-title
-            >
+            <v-card-title>Engagement et politiques ESG des exploitants</v-card-title>
             <v-card-text>
               <v-simple-table>
                 <thead>
@@ -411,9 +332,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2097
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2097</v-chip>
                     </td>
                     <td>
                       Si locataire unique: le client/locataire a été sensibilisé
@@ -425,18 +344,14 @@
                     <td>Oui, a montré une démarche positive</td>
                     <td>Calcul avec données publiques</td>
                     <td>
-                      <v-btn fab class="ma-2" color="primary" outlined
-                        ><v-icon @click="openComm = true" color="blue"
-                          >chat</v-icon
-                        ></v-btn
-                      >
+                      <v-btn fab class="ma-2" color="primary" outlined>
+                        <v-icon @click="openComm = true" color="blue">chat</v-icon>
+                      </v-btn>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2099
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2099</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Oui, a montré une démarche positive</td>
@@ -444,18 +359,14 @@
                     <td>N/A</td>
                     <td>Publications entreprises</td>
                     <td>
-                      <v-btn fab class="ma-2" color="grey" outlined
-                        ><v-icon @click="openComm = true" color="grey"
-                          >chat</v-icon
-                        ></v-btn
-                      >
+                      <v-btn fab class="ma-2" color="grey" outlined>
+                        <v-icon @click="openComm = true" color="grey">chat</v-icon>
+                      </v-btn>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2091
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2091</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Non, n'a pas montré une démarche positive</td>
@@ -466,9 +377,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2092
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2092</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Non, n'a pas montré une démarche positive</td>
@@ -479,9 +388,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2093
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2093</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Non, n'a pas montré une démarche positive</td>
@@ -489,18 +396,14 @@
                     <td>Oui, a montré une démarche positive</td>
                     <td>Calcul avec données publiques</td>
                     <td>
-                      <v-btn fab class="ma-2" color="primary" outlined
-                        ><v-icon @click="openComm = true" color="blue"
-                          >chat</v-icon
-                        ></v-btn
-                      >
+                      <v-btn fab class="ma-2" color="primary" outlined>
+                        <v-icon @click="openComm = true" color="blue">chat</v-icon>
+                      </v-btn>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2095
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2095</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Non, n'a pas montré une démarche positive</td>
@@ -508,18 +411,14 @@
                     <td>Oui, a montré une démarche positive</td>
                     <td>Calcul avec données publiques</td>
                     <td>
-                      <v-btn fab class="ma-2" color="primary" outlined
-                        ><v-icon @click="openComm = true" color="blue"
-                          >chat</v-icon
-                        ></v-btn
-                      >
+                      <v-btn fab class="ma-2" color="primary" outlined>
+                        <v-icon @click="openComm = true" color="blue">chat</v-icon>
+                      </v-btn>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <v-chip class="ma-2" label outlined>
-                        Q2090
-                      </v-chip>
+                      <v-chip class="ma-2" label outlined>Q2090</v-chip>
                     </td>
                     <td>Si locataire unique: Annexe environement</td>
                     <td>Non, n'a pas montré une démarche positive</td>
@@ -527,11 +426,9 @@
                     <td>Oui, a montré une démarche positive</td>
                     <td>Calcul avec données publiques</td>
                     <td>
-                      <v-btn fab class="ma-2" color="primary" outlined
-                        ><v-icon @click="openComm = true" color="blue"
-                          >chat</v-icon
-                        ></v-btn
-                      >
+                      <v-btn fab class="ma-2" color="primary" outlined>
+                        <v-icon @click="openComm = true" color="blue">chat</v-icon>
+                      </v-btn>
                     </td>
                   </tr>
                 </tbody>
@@ -544,10 +441,10 @@
                 transition="slide-y-transition"
               >
                 <v-card width="500" class="borderBlue">
-                  <v-card-title> {{ $t("general.comment")}}</v-card-title>
+                  <v-card-title>{{ $t("general.comment")}}</v-card-title>
 
                   <v-card-text>
-                    <v-icon left>record_voice_over</v-icon> Lorem ipsum dolor
+                    <v-icon left>record_voice_over</v-icon>Lorem ipsum dolor
                     sit amet, consectetur adipiscing elit. Duis venenatis
                     faucibus eros, eu finibus ligula. Maecenas non tortor quis
                     elit elementum venenatis. Aenean mauris justo, laoreet
@@ -571,11 +468,12 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts';
-import { headers, desserts } from '../../data/datasDetail';
+import { headers, desserts, entreprises } from '../../data/datasDetail';
 
 export default {
   name: 'Detail',
   data: () => ({
+    entreprise: {},
     openComm: false,
     dialogTwo: false,
     tab: null,
@@ -611,45 +509,47 @@ export default {
         categories: [2018, 2017, 2016],
       },
     },
-
-    optionsTwo: {
-      toolbar: {
-        show: false,
-      },
-      labels: [
-        'Environement',
-        'Gouvernement',
-        'Labelisation',
-        'Economique',
-        'Social',
-      ],
-    },
-    series: [
+  }),
+  created() {
+    this.entreprise = entreprises[this.$route.params.id - 1];
+    const entreprise = this.entreprise;
+    this.series = [
       {
         name: 'Année 2018',
-        data: [80],
+        data: [entreprise.notes['2018']],
       },
       {
         name: 'Année 2017',
-        data: [60],
+        data: [entreprise.notes['2017']],
       },
       {
         name: 'Année 2016',
-        data: [40],
+        data: [entreprise.notes['2016']],
       },
-    ],
-    seriesTwo: [
+    ];
+
+    const familleTitle = entreprise.familles.map(famille => famille.title);
+
+    this.optionsTwo = {
+      labels: [...familleTitle],
+    };
+
+    const benchmarkNotes = entreprise.familles.map(
+      famille => famille.benchmark,
+    );
+    console.log(benchmarkNotes);
+
+    this.seriesTwo = [
       {
         name: 'Benchmark',
-        data: [80, 60, 30, 70, 100],
+        data: [...benchmarkNotes],
       },
       {
-        name: 'Société',
-        data: [100, 90, 60, 20, 80],
+        name: entreprise.name,
+        data: [100, 90, 60, 20],
       },
-    ],
-  }),
-  created() {},
+    ];
+  },
   methods: {
     goDetail() {
       this.tab = 'performance';
@@ -666,12 +566,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
 .theme--light.v-data-table thead tr:last-child th {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
-
-
 </style>
